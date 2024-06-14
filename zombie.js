@@ -33,6 +33,15 @@ export default class Zombie{
   this.zombie.position.set(this.zombie.position.x+ v.x,this.zombie.position.y+ v.y)
     }
 
+    kill(){
+        this.app.stage.removeChild(this.zombie);
+    }
+
+    get position(){
+        return this.zombie.position;
+
+    }
+
 
     // Function to render the zombies 
     randomSpawnPoint(){
