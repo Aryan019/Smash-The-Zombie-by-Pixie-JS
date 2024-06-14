@@ -4,7 +4,7 @@ import Victor from "victor";
 export default class Spawner{
     constructor({create}){
         const spawnInterval = 1000;
-        this.maxSpawns = 1;
+        this.maxSpawns = 10;
         this.create = create;
         this.spawns = [];
         setInterval(()=>this.spawn(),spawnInterval)
