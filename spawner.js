@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import Victor from "victor";
+import GameState from "./game-state";
 
 export default class Spawner{
     constructor({app, create}){
@@ -12,7 +13,7 @@ export default class Spawner{
     }
 
     spawn(){
-        if(this.app.gameStarted === false) return;
+        if(this.app.gameState !== GameState.RUNNING) return;
         if(this.spawns.length>=this.maxSpawns) return;
         let s = this.create();
         this.spawns.push(s);

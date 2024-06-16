@@ -8,6 +8,8 @@ import Spawner from "./spawner.js";
 import Weather from "./weather.js";
 import {zombies, textStyle, subTextStyle } from "./globals.js";
 
+import GameState from "./game-state.js";
+
 
 
 
@@ -29,6 +31,10 @@ initGame();
 
 async function initGame(){
 
+  // Adding in the game state 
+  app.gameState = GameState.PREINTRO;
+
+
   try{
     console.log("Loading Assets Check...")
     await loadAssets();
@@ -39,22 +45,48 @@ async function initGame(){
       let player = new Player({ app });
       let ZSpawner = new Spawner({app, create: ()=> new Zombie({app,player})});
 
+      let gamePreIntroScene = createScene("Smash The Zombies","Click to Continue");
       let gameStartScene = createScene("Smash The Zombies","Click to Start :-|");
-      let gameOverScene = createScene("Game Over :-(")
+      let gameOverScene = createScene("Game Over :-( ")
 
-      app.gameStarted = false;
+      
+
+      // app.gameStarted = false;
 
       app.ticker.add((delta)=>{
 
-        gameOverScene.visible = player.dead;
+        if(player.dead) app.gameState = GameState.GAMEOVER;
 
-        gameStartScene.visible = !app.gameStarted;
+        gamePreIntroScene.visible = app.gameState === GameState.PREINTRO;
+        gameStartScene.visible = app.gameState === GameState.START;
+        gameOverScene.visible = app.gameState === GameState.GAMEOVER;
 
-        if(app.gameStarted===false) return;
-        player.update(delta);
-        // zombie.update(); 
-        ZSpawner.spawns.forEach((zombie) => zombie.update(delta));
-        bulletHitTest({bullets:player.shooting.bullets,zombies:ZSpawner.spawns,bulletRadius:8,zombieRadius:16});
+        switch(app.gameState){
+          case GameState.PREINTRO:
+            player.scale = 4;
+            break;
+            case GameState.INTRO:
+              player.scale -=0.01;
+
+              if(player.scale <= 1) app.gameState = GameState.START;
+              break;
+            case GameState.RUNNING:
+              player.update(delta);
+              // zombie.update(); 
+              ZSpawner.spawns.forEach((zombie) => zombie.update(delta));
+              bulletHitTest({bullets:player.shooting.bullets,zombies:ZSpawner.spawns,bulletRadius:8,zombieRadius:16});
+
+            break;
+
+            default:
+              break;
+
+        }
+
+        
+
+        // if(app.gameStarted===false) return;
+      
 
 
 })
@@ -105,10 +137,12 @@ function createScene(sceneText, sceneSubText){
   return sceneContainer;
 }
 
-function startGame(){
-  app.gameStarted = true;
-  app.weather.enableSound();
-}
+
+// Commenting out due to adding the game states
+// function startGame(){
+//   app.gameStarted = true;
+//   app.weather.enableSound();
+// }
 
 
 async function loadAssets(){
@@ -123,7 +157,24 @@ async function loadAssets(){
   })
 }
 
-document.addEventListener("click",startGame);
+function clickHandler(){
+  switch(app.gameState){
+    case GameState.PREINTRO:
+      app.gameState = GameState.INTRO;
+      // music.play();
+      break;
+
+      case GameState.START:
+      app.gameState = GameState.RUNNING;
+      // zombieHorde.play();
+      break;
+
+      default:
+      break;
+  }
+}
+
+document.addEventListener("click",clickHandler);
 
 
 

@@ -46,6 +46,14 @@ export default class Player{
 
     }
 
+    set scale(s){
+        this.player.scale.set(s);
+
+    }
+    get scale(){
+        return this.player.scale.x;
+    }
+
     attack(){
         this.health -=1;
         this.healthBar.width = (this.health/this.maxHealth) * this.healthBar.initialWidth
