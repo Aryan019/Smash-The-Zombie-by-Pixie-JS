@@ -9,14 +9,18 @@ import { zombies } from "./global.js";
 
 
 
-let canvasSize = 512;
+let canvasSize = 400;
 const canvas = document.getElementById("mycanvas");
 const app = new PIXI.Application({
   view: canvas,
   width: canvasSize,
   height: canvasSize,
-  backgroundColor: 0x5c812f
+  backgroundColor: 0x312a2b,
+  resolution: 2
 });
+
+// Configuring the PIXIE for the graphic adjustment 
+PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
 
 initGame();
