@@ -43,7 +43,7 @@ export default class Shooting{
         bullet.anchor.set(0.5);
         bullet.scale.set(0.2)
         bullet.position.set(this.player.position.x, this.player.position.y);
-        bullet.rotation = this.player.rotation;
+        bullet.rotation = this.player.rotation;  
 
         let angle = this.player.rotation - Math.PI / 2;
         bullet.velocity = new Victor(
