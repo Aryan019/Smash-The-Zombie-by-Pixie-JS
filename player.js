@@ -51,6 +51,7 @@ export default class Player{
     }
   
     update(){
+        if(this.dead) return;
         // this.attack();
         const mouse = this.app.renderer.plugins.interaction.mouse;
         const cursorPosition = mouse.global;
