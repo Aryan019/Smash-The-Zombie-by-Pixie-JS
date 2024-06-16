@@ -26,6 +26,24 @@ const app = new PIXI.Application({
 // Configuring the PIXIE for the graphic adjustment 
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
+// Adding in the Music  
+const music = new Audio("./assets/SmashZombie.mp3")
+  // Loop without glitch from music
+  music.addEventListener("timeupdate",function(){
+    if(this.currentTime> this.duration - 0.2){
+        this.currentTime = 0;
+    }
+})
+
+// Zombie sounds 
+const zombieSound = new Audio("/assets/ZombieSound.mp3")
+zombieSound.volume= 0.6;
+zombieSound.addEventListener("timeupdate",function(){
+  if(this.currentTime> this.duration - 0.2){
+      this.currentTime = 0;
+  }
+})
+
 
 initGame();
 
@@ -161,12 +179,13 @@ function clickHandler(){
   switch(app.gameState){
     case GameState.PREINTRO:
       app.gameState = GameState.INTRO;
-      // music.play();
+      music.play();
+      app.weather.enableSound();
       break;
 
       case GameState.START:
       app.gameState = GameState.RUNNING;
-      // zombieHorde.play();
+     zombieSound.play();
       break;
 
       default:

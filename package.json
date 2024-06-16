@@ -1,5 +1,6 @@
 {
   "name": "snowpack-pixijs-0",
+  "author": "Aryan",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

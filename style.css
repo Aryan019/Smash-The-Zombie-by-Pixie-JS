@@ -6,6 +6,7 @@
 
 body {
   font-family: sans-serif;
+  cursor: url("./assets/crosshairs.png") 16 16, auto;
 }
 
 .container{

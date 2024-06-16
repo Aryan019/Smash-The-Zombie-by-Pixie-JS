@@ -34,6 +34,8 @@ export default class Zombie{
       // this.zombie.drawCircle(0,0,radius)
       // this.zombie.endFill();
       app.stage.addChild(this.zombie);
+
+      this.audio = new Audio("./assets/squelch.mp3")
   
     }
 
@@ -70,6 +72,10 @@ export default class Zombie{
         // this.app.stage.removeChild(this.zombie);
         // clearInterval(this.interval)
 
+        this.audio.currentTime = 0;
+        // this.volume(0.6)
+        this.audio.play();
+
         this.zombie.textures = this.die.textures;
         this.zombie.loop = false;
 
@@ -77,6 +83,9 @@ export default class Zombie{
         this.zombie.onComplete = ()=>setTimeout(()=>this.app.stage.removeChild(this.zombie),30000);
 
         this.zombie.play();
+
+         this.zombie.zIndex = -1;
+         clearInterval(this.interval)
     }
 
     get position(){

@@ -12,10 +12,13 @@ export default class Shooting{
 
         this.bulletRadius = 8;
         this.maxBullets = 3;
+        this.audio = new Audio("./assets/shoot.mp3");
 
     }
 
     fire(){
+        this.audio.currentTime = 0;
+        this.audio.play();
         if(this.bullets.length>=this.maxBullets){
             let b = this.bullets.shift();
             this.app.stage.removeChild(b);
