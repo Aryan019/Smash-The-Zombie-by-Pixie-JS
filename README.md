@@ -1,5 +1,8 @@
 # Smash-The-Zombie 🧟‍♂️💥
 
+![image](https://github.com/Aryan019/Smash-The-Zombie-by-Pixie-JS/assets/113816564/27ece1e7-85ce-435a-b7d8-bd5841cd2058)
+
+
 **Smash-The-Zombie** is a 2D game developed using PIXI.js. 
 In this game, zombies attack you, and you must defend yourself by shooting them. 
 The game includes engaging music to enhance the gameplay experience.
