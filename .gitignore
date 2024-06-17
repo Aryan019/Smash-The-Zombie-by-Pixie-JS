@@ -3,4 +3,3 @@ build
 npm-debug.log
 .env
 .vscode/
-assets
